@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Vikas Yadav – Data Engineer & CMS Student</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --text-xs: 0.8rem;
+      --text-sm: 0.9rem;
+      --text-base: 1rem;
+      --text-lg: 1.2rem;
+      --text-xl: 1.6rem;
+      --text-2xl: 2.2rem;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+
+      --color-bg: #f7f6f2;
+      --color-surface: #fbfbf9;
+      --color-surface-2: #f3f0ec;
+      --color-border: #d4d1ca;
+      --color-text: #24221c;
+      --color-text-muted: #6b6861;
+      --color-primary: #01696f;
+      --color-primary-hover: #0c4e54;
+
+      --radius-md: 0.5rem;
+      --radius-full: 999px;
+
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 6px 25px rgba(15, 23, 42, 0.12);
+
+      --content-width: 960px;
+
+      --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #22211f;
+      --color-border: #393836;
+      --color-text: #e2e1dd;
+      --color-text-muted: #8b8983;
+      --color-primary: #4f98a3;
+      --color-primary-hover: #227f8b;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background: radial-gradient(circle at top left, #ece7dd 0, #f7f6f2 40%, #f7f6f2 100%);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    a:hover { color: var(--color-primary-hover); }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      font-family: 'Instrument Serif', 'Georgia', serif;
+      letter-spacing: -0.02em;
+    }
+    p { line-height: 1.6; max-width: 70ch; }
+
+    .page {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4) var(--space-12);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-8);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: conic-gradient(from 210deg, #01696f, #0b4c54, #f7f6f2, #01696f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .logo-mark span {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: #f7f6f2;
+    }
+    .brand-text { display: flex; flex-direction: column; }
+    .brand-text span:first-child {
+      font-weight: 600;
+      font-size: var(--text-sm);
+    }
+    .brand-text span:last-child {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+
+    .theme-toggle {
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      padding: 0.4rem 0.8rem;
+      font-size: var(--text-xs);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--color-surface);
+      cursor: pointer;
+      transition: background var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+    .theme-toggle:hover {
+      box-shadow: var(--shadow-sm);
+      border-color: var(--color-primary);
+    }
+
+    .hero {
+      background: var(--color-surface);
+      border-radius: 1.25rem;
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+    .hero-kicker {
+      font-size: var(--text-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+    .hero h1 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-3);
+    }
+    .hero-subtitle {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.3rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast),
+                  box-shadow var(--transition-fast), border-color var(--transition-fast),
+                  transform 120ms ease-out;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--color-primary);
+      color: #f7f6f2;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      border-color: var(--color-border);
+      color: var(--color-text);
+    }
+    .btn-ghost:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      display: grid;
+      gap: var(--space-2);
+      align-content: flex-start;
+    }
+    .hero-meta strong { color: var(--color-text); font-weight: 600; }
+
+    main { display: grid; gap: var(--space-8); }
+
+    section {
+      padding: var(--space-4);
+      border-radius: 1rem;
+      background: var(--color-surface);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    section h2 {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3);
+    }
+
+    .two-col {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: var(--space-2);
+    }
+    .pill {
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      background: var(--color-surface-2);
+    }
+
+    .experience-item, .project-item, .edu-item {
+      padding-block: var(--space-2);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    .experience-item:last-child,
+    .project-item:last-child,
+    .edu-item:last-child {
+      border-bottom: none;
+    }
+    .item-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-2);
+      margin-bottom: 0.25rem;
+    }
+    .item-title { font-weight: 600; }
+    .item-meta { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .item-body { font-size: var(--text-sm); color: var(--color-text); }
+    .item-body ul {
+      margin-left: 1.2rem;
+      margin-top: 0.35rem;
+    }
+    .item-body li { margin-bottom: 0.15rem; }
+
+    .projects-grid { display: grid; gap: var(--space-3); }
+    .project-item {
+      padding: var(--space-3);
+      border-radius: 0.9rem;
+      background: var(--color-surface-2);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .project-links {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: var(--text-xs);
+    }
+
+    .contact-list { list-style: none; font-size: var(--text-sm); }
+    .contact-list li + li { margin-top: 0.3rem; }
+
+    footer {
+      margin-top: var(--space-6);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: var(--space-4);
+      }
+      section { padding: var(--space-3); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="logo-mark" aria-hidden="true">
+          <span>VY</span>
+        </div>
+        <div class="brand-text">
+          <span>Vikas Yadav</span>
+          <span>Data Engineer · CMS @ TU Dresden</span>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" id="themeToggle">
+        <span aria-hidden="true">●</span>
+        <span>Toggle theme</span>
+      </button>
+    </header>
+
+    <section class="hero" id="top">
+      <div>
+        <p class="hero-kicker">Data Engineering · Analytics · ML</p>
+        <h1>Building reliable data systems for real‑world problems.</h1>
+        <p class="hero-subtitle">
+          Data engineer with ~4 years of experience, now pursuing an M.Sc. in Computational Modeling &amp; Simulation at TU Dresden.
+          Looking for part‑time (Werkstudent / Hiwi) roles in data engineering, analytics, or ML in Germany.
+        </p>
+        <div class="hero-actions">
+          <!-- Make sure a cv.pdf is in the same folder in your GitHub repo -->
+          <a href="cv.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download CV</a>
+          <a href="#contact" class="btn btn-ghost">Contact &amp; links</a>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div>
+          <strong>Based in</strong><br>
+          Dresden, Germany
+        </div>
+        <div>
+          <strong>Current focus</strong><br>
+          Data engineering, scientific computing, and life‑science data.
+        </div>
+        <div>
+          <strong>Open to</strong><br>
+          Working‑student, Hiwi/SHK, and remote data roles.
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="about">
+        <h2>About</h2>
+        <div class="two-col">
+          <p>
+            I am a data engineer with around four years of professional experience building data pipelines, warehouse solutions, and analytics tooling.
+            Currently, I am studying Computational Modeling and Simulation (life sciences track) at TU Dresden, where I focus on data‑intensive modeling and machine learning.
+          </p>
+          <p>
+            I enjoy turning messy, real‑world data into reliable systems and actionable insights.
+            In Germany, I am looking for working‑student or Hiwi roles where I can contribute immediately while deepening my skills in Python, SQL, and modern data platforms.
+          </p>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <div class="two-col">
+          <div>
+            <h3>Data &amp; Engineering</h3>
+            <div class="pill-list">
+              <span class="pill">Python</span>
+              <span class="pill">SQL</span>
+              <span class="pill">Apache Spark</span>
+              <span class="pill">Hive / HDFS</span>
+              <span class="pill">ETL / ELT</span>
+              <span class="pill">Data modeling</span>
+              <span class="pill">Batch &amp; streaming</span>
+            </div>
+          </div>
+          <div>
+            <h3>Tools &amp; Platforms</h3>
+            <div class="pill-list">
+              <span class="pill">Azure (Databricks / Data Factory)</span>
+              <span class="pill">Power BI / dashboards</span>
+              <span class="pill">Linux · Git</span>
+              <span class="pill">Jupyter</span>
+            </div>
+            <h3 style="margin-top:1rem;">Currently learning</h3>
+            <div class="pill-list">
+              <span class="pill">German language (A1)</span>
+              <span class="pill">Machine learning</span>
+              <span class="pill">Scientific Python stack</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>Experience</h2>
+
+        <!-- Role based on your data engineering experience at IQVIA -->
+        <article class="experience-item">
+          <div class="item-header">
+            <div class="item-title">Data Engineer</div>
+            <div class="item-meta">IQVIA · ~4 years</div>
+          </div>
+          <div class="item-body">
+            <ul>
+              <li>Designed and maintained end‑to‑end ETL pipelines using Python, SQL, and big‑data technologies.</li>
+              <li>Developed and optimised data models and warehouse tables to support analytics and reporting use‑cases.</li>
+              <li>Improved reliability by adding monitoring, alerting, and data quality checks across critical data flows.</li>
+              <li>Collaborated with analysts, data scientists, and business stakeholders to understand requirements and deliver usable datasets.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- You can adjust or add another role here if needed -->
+        <article class="experience-item">
+          <div class="item-header">
+            <div class="item-title">Earlier Data / Software Roles</div>
+            <div class="item-meta">India · prior to Master’s</div>
+          </div>
+          <div class="item-body">
+            <ul>
+              <li>Worked across the data stack – ingestion, transformation, modeling, and reporting – in cross‑functional teams.</li>
+              <li>Helped debug and optimise SQL queries and jobs running on large datasets.</li>
+              <li>Contributed to internal tools and scripts that automated recurring data‑related tasks.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section id="projects">
+        <h2>Selected projects</h2>
+        <div class="projects-grid">
+
+          <!-- Rename and point these to your real repos when ready -->
+          <article class="project-item">
+            <div class="item-header">
+              <div class="item-title">End‑to‑end ETL pipeline for a public dataset</div>
+              <div class="item-meta">Python · Spark · SQL · Azure</div>
+            </div>
+            <div class="item-body">
+              <p>
+                Built a small, production‑like pipeline that ingests raw data, validates it, transforms it into analytics‑ready tables,
+                and exposes them to a BI dashboard.
+              </p>
+              <ul>
+                <li>Implemented ingestion and transformations in PySpark with modular, testable code.</li>
+                <li>Added data quality checks and logging for easier debugging.</li>
+                <li>Scheduled regular runs to keep derived tables fresh for downstream consumers.</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/Vikas9246" target="_blank" rel="noopener noreferrer">GitHub repo</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">Project write‑up</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-item">
+            <div class="item-header">
+              <div class="item-title">Exploratory analysis &amp; ML on life‑science data</div>
+              <div class="item-meta">Python · Pandas · scikit‑learn</div>
+            </div>
+            <div class="item-body">
+              <p>
+                Course or side project analysing a biological or clinical dataset, with a focus on clear EDA, feature engineering,
+                and baseline modeling.
+              </p>
+              <ul>
+                <li>Cleaned and visualised the dataset to uncover key patterns and issues.</li>
+                <li>Trained baseline models and evaluated them with appropriate metrics.</li>
+                <li>Documented the full workflow in a reproducible Jupyter notebook.</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/Vikas9246" target="_blank" rel="noopener noreferrer">Notebook / repo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-item">
+            <div class="item-header">
+              <div class="item-title">Analytics dashboard</div>
+              <div class="item-meta">Power BI (or similar) · SQL</div>
+            </div>
+            <div class="item-body">
+              <p>
+                Built an interactive dashboard to track key metrics, from raw tables through to visualisation.
+              </p>
+              <ul>
+                <li>Modelled fact and dimension tables to support simple and robust reporting.</li>
+                <li>Created visuals for trends, distributions, and drill‑downs.</li>
+                <li>Documented how stakeholders can use and interpret the dashboard.</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" target="_blank" rel="noopener noreferrer">Dashboard screenshots</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+
+        <article class="edu-item">
+          <div class="item-header">
+            <div class="item-title">M.Sc. Computational Modeling and Simulation</div>
+            <div class="item-meta">TU Dresden · 2025 – present</div>
+          </div>
+          <div class="item-body">
+            <p class="item-meta">
+              Life sciences track, with coursework in numerical methods, statistics, and data‑intensive modeling.
+            </p>
+          </div>
+        </article>
+
+        <article class="edu-item">
+          <div class="item-header">
+            <div class="item-title">Dual Degree Master’s · [Field]</div>
+            <div class="item-meta">IIT Madras · [Years]</div>
+          </div>
+          <div class="item-body">
+            <p class="item-meta">
+              Integrated dual‑degree programme combining strong foundations in computer science / data with advanced coursework and a research‑oriented master’s thesis.
+            </p>
+          </div>
+        </article>
+
+        <article class="edu-item">
+          <div class="item-header">
+            <div class="item-title">Erasmus Exchange · [Programme / Track]</div>
+            <div class="item-meta">University of Lisbon · [Semester / Year]</div>
+          </div>
+          <div class="item-body">
+            <p class="item-meta">
+              Erasmus mobility focusing on international collaboration and study in data‑intensive or computational subjects.
+            </p>
+          </div>
+        </article>
+
+        <article class="edu-item">
+          <div class="item-header">
+            <div class="item-title">B.Tech in [Your discipline]</div>
+            <div class="item-meta">IIT Madras · [Years]</div>
+          </div>
+          <div class="item-body">
+            <p class="item-meta">
+              Relevant coursework: data structures &amp; algorithms, databases, probability and statistics, machine learning (if applicable).
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="contact">
+        <h2>Contact &amp; links</h2>
+        <ul class="contact-list">
+          <li>Email: <a href="mailto:vky26716@gmail.com">vky26716@gmail.com</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/vikashyadav02/" target="_blank" rel="noopener noreferrer">linkedin.com/in/vikashyadav02</a></li>
+          <li>GitHub: <a href="https://github.com/Vikas9246" target="_blank" rel="noopener noreferrer">github.com/Vikas9246</a></li>
+          <li>Location: Dresden, Germany (open to remote within Germany/EU)</li>
+        </ul>
+        <p style="margin-top:1rem; font-size:var(--text-xs); color:var(--color-text-muted);">
+          Kurz auf Deutsch: Ich bin Data Engineer mit mehrjähriger Berufserfahrung und studiere derzeit Computational Modeling and Simulation an der TU Dresden.
+          Ich suche eine Werkstudenten‑ oder Hiwi‑Stelle im Bereich Data Engineering, Analytics oder Machine Learning.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Vikas Yadav · Built with HTML &amp; CSS
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+
+      function prefersDark() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      function setTheme(mode) {
+        root.setAttribute('data-theme', mode);
+        btn.querySelector('span[aria-hidden="true"]').textContent = mode === 'dark' ? '○' : '●';
+      }
+
+      setTheme(prefersDark() ? 'dark' : 'light');
+
+      btn.addEventListener('click', () => {
+        const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
